@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 // import { BrowserRouter } from "react-router-dom";
 
@@ -27,10 +28,10 @@ export default theme;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <BrowserRouter> */}
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
-    {/* </BrowserRouter> */}
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,15 +1,23 @@
-import Auth from "../pages/Auth";
-import InstagramHome from "../pages/InstagramHome";
+// import NavigationPage from "../layout/NavigationPage";
+// import Auth from "../pages/Auth";
+// import InstagramHome from "../pages/InstagramHome";
 
-const routes = [
-  {
-    path: "/",
-    element: <InstagramHome />,
-  },
-  {
-    path: "/auth",
-    element: <Auth />,
-  },
-];
+// const routes = [
+//   {
+//     path: "/",
+//     element: <NavigationPage />,
+//     children: [
+//       {
+//         path: "/",
+//         element: <InstagramHome />,
+//       },
+//     ],
+//   },
 
-export default routes;
+//   {
+//     path: "/auth",
+//     element: <Auth />,
+//   },
+// ];
+
+// export default routes;
