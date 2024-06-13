@@ -31,7 +31,13 @@ const Sidebar = () => {
       text: "Create",
     },
     {
-      icon: <Avatar size={"sm"} name="Ilqar Quliyev" src="/myprofile.png" />,
+      icon: (
+        <Avatar
+          size={"sm"}
+          name="Ilqar Quliyev"
+          src="https://avatars.githubusercontent.com/u/161597844?v=4"
+        />
+      ),
       text: "Profile",
       link: "/profile",
     },
