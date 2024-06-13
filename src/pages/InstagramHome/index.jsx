@@ -1,6 +1,7 @@
 import { Container, Flex, Box } from "@chakra-ui/react";
 import React from "react";
 import UserPosts from "../../components/UserPosts";
+import SuggestedUsers from "../../components/SuggestedUsers/SuggestedUsers";
 
 const InstagramHome = () => {
   return (
@@ -15,7 +16,7 @@ const InstagramHome = () => {
           display={{ base: "none", lg: "block" }}
           maxW={"300px"}
         >
-          Suggested
+          <SuggestedUsers />
         </Box>
       </Flex>
     </Container>

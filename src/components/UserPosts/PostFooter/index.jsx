@@ -14,7 +14,7 @@ import {
   UnlikeLogo,
 } from "../../../assets/contants";
 
-const PostFooter = () => {
+const PostFooter = ({ username }) => {
   const [like, setLike] = useState(false);
   const [likes, setLikes] = useState(108);
 
@@ -42,7 +42,7 @@ const PostFooter = () => {
         {likes} likes
       </Text>
       <Text fontSize="sm" fontWeight={700}>
-        guliyevv_i{" "}
+        {username}{" "}
         <Text as="span" fontWeight={400}>
           Salam
         </Text>
