@@ -4,6 +4,7 @@ import NavigationPage from "../src/layout/NavigationPage";
 import InstagramHome from "../src/pages/InstagramHome";
 import Auth from "../src/pages/Auth";
 import { Route, Routes } from "react-router-dom";
+import ProfilePage from "./pages/ProfilePage";
 // import routes from "./routes/routes";
 
 // const router = createBrowserRouter(routes);
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<InstagramHome />}></Route>
         <Route path="/auth" element={<Auth />}></Route>
+        <Route path="/:profile" element={<ProfilePage />}></Route>
       </Routes>
     </NavigationPage>
   );
