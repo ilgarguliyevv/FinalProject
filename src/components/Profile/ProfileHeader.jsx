@@ -1,4 +1,11 @@
-import { Avatar, AvatarGroup, Flex, VStack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  AvatarGroup,
+  Flex,
+  VStack,
+  Text,
+  Button,
+} from "@chakra-ui/react";
 import React from "react";
 
 const ProfileHeader = () => {
@@ -25,7 +32,43 @@ const ProfileHeader = () => {
           w={"full"}
         >
           <Text fontSize={{ base: "sm", md: "lg" }}>guliyevv_i</Text>
+          <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+            <Button
+              bg={"white"}
+              color={"black"}
+              _hover={{ bg: "whiteAlpha.800" }}
+              size={{ base: "xs", md: "sm" }}
+            >
+              Edit Profile
+            </Button>
+          </Flex>
         </Flex>
+        <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
+          <Text fontSize={{ base: "xs", md: "sm" }}>
+            <Text as={"span"} fontWeight={"bold"} mr={1}>
+              1
+            </Text>
+            Posts
+          </Text>
+          <Text fontSize={{ base: "xs", md: "sm" }}>
+            <Text as={"span"} fontWeight={"bold"} mr={1}>
+              219
+            </Text>
+            Followers
+          </Text>
+          <Text fontSize={{ base: "xs", md: "sm" }}>
+            <Text as={"span"} fontWeight={"bold"} mr={1}>
+              334
+            </Text>
+            Following
+          </Text>
+        </Flex>
+        <Flex alignItems={"center"} gap={4}>
+          <Text fontSize={"sm"} fontWeight={"bold"}>
+            İlqar Quliyev
+          </Text>
+        </Flex>
+        <Text fontSize={"sm"}>Front end developer 👨🏻‍💻</Text>
       </VStack>
     </Flex>
   );
