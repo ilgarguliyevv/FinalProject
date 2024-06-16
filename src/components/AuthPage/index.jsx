@@ -2,6 +2,7 @@ import { Box, VStack, Image, Flex, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import GoogleAuth from "./GoogleAuth";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,12 +31,7 @@ const AuthPage = () => {
             </Text>
             <Box flex={2} h={"1px"} bg={"gray.400"} />
           </Flex>
-          <Flex>
-            <Image src="/GoogleLogo.png" w={5} alt="Google Logo" />
-            <Text mx={2} color={"blue.500"} cursor={"pointer"}>
-              Login in with Google
-            </Text>
-          </Flex>
+          <GoogleAuth />
         </VStack>
       </Box>
 
