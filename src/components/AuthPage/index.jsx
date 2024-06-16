@@ -1,34 +1,11 @@
-import {
-  Box,
-  VStack,
-  Image,
-  Input,
-  Button,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Box, VStack, Image, Flex, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Login from "./Login";
+import SignUp from "./SignUp";
 
 const AuthPage = () => {
-  const [Login, setLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true);
 
-  const navigete = useNavigate();
-
-  const [input, setInput] = useState({
-    email: "",
-    password: "",
-    confirmpassword: "",
-  });
-
-  const handleLogin = () => {
-    // console.log("input", input);
-    if (!input.email || !input.password) {
-      alert("Hamısını doldurun");
-      return;
-    }
-    navigete("/");
-  };
   return (
     <>
       <Box border={"1px solid gray"} borderRadius={4} padding={5}>
@@ -39,40 +16,7 @@ const AuthPage = () => {
             cursor={"pointer"}
             alt="Instagram Logo"
           />
-          <Input
-            placeholder="Email"
-            fontSize={14}
-            type="email"
-            value={input.email}
-            onChange={(e) => setInput({ ...input, email: e.target.value })}
-          />
-          <Input
-            placeholder="Password"
-            fontSize={14}
-            type="password"
-            value={input.password}
-            onChange={(e) => setInput({ ...input, password: e.target.value })}
-          />
-          {!Login ? (
-            <Input
-              placeholder="Confirm password"
-              fontSize={14}
-              type="password"
-              value={input.confirmpassword}
-              onChange={(e) =>
-                setInput({ ...input, confirmpassword: e.target.value })
-              }
-            />
-          ) : null}
-          <Button
-            w={"full"}
-            colorScheme="blue"
-            size={"sm"}
-            fontSize={14}
-            onClick={handleLogin}
-          >
-            {Login ? "Login" : "Sign Up"}
-          </Button>
+          {isLogin ? <Login /> : <SignUp />}
           <Flex
             alignItems={"center"}
             justifyContent={"center"}
@@ -86,7 +30,6 @@ const AuthPage = () => {
             </Text>
             <Box flex={2} h={"1px"} bg={"gray.400"} />
           </Flex>
-
           <Flex>
             <Image src="/GoogleLogo.png" w={5} alt="Google Logo" />
             <Text mx={2} color={"blue.500"} cursor={"pointer"}>
@@ -102,7 +45,7 @@ const AuthPage = () => {
             {Login ? "Don't have an account?" : "Already have an account"}
           </Box>
           <Box
-            onClick={() => setLogin(!Login)}
+            onClick={() => setIsLogin(!isLogin)}
             color={"blue.500"}
             cursor={"pointer"}
           >
