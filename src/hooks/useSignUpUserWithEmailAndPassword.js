@@ -2,11 +2,13 @@ import { auth, firestore } from "../firebase/firebase";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { doc, setDoc } from "firebase/firestore";
 import useShowToast from "./useShowToast";
+import useAuthStore from "../store/authStore";
 
 const useSignUpUserWithEmailAndPassword = () => {
   const [createUserWithEmailAndPassword, loading, user, error] =
     useCreateUserWithEmailAndPassword(auth);
   const showToast = useShowToast();
+  const loginUser = useAuthStore((state) => state.login);
 
   const signup = async (inputs) => {
     if (
@@ -19,7 +21,7 @@ const useSignUpUserWithEmailAndPassword = () => {
       return;
     }
     try {
-      const { user: newUser } = createUserWithEmailAndPassword(
+      const { user: newUser } = await createUserWithEmailAndPassword(
         inputs.email,
         inputs.password
       );
@@ -40,8 +42,14 @@ const useSignUpUserWithEmailAndPassword = () => {
           posts: [],
           createdAt: Date.now(),
         };
-        await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
+
+        await setDoc(doc(firestore, "users", newUser.uid), userDoc);
+
         localStorage.setItem("user-info", JSON.stringify(userDoc));
+
+        loginUser(userDoc);
+
+        console.log("User stored and logged in:", userDoc);
       } else if (error) {
         showToast("Error", error.message, "error");
       }
