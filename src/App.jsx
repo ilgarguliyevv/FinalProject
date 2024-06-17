@@ -5,15 +5,15 @@ import InstagramHome from "../src/pages/InstagramHome";
 import Auth from "../src/pages/Auth";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage";
-import { useEffect } from "react";
-import useAuthStore from "./store/authStore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./firebase/firebase";
 // import routes from "./routes/routes";
 
 // const router = createBrowserRouter(routes);
 
 function App() {
   // return <RouterProvider router={router} />;
-  const authUser = useAuthStore((state) => state.user);
+  const [authUser] = useAuthState(auth);
 
   return (
     <NavigationPage>
