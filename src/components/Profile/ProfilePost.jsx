@@ -13,6 +13,7 @@ import {
   Avatar,
   Divider,
   VStack,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import { AiFillHeart } from "react-icons/ai";
@@ -20,9 +21,14 @@ import { FaComment } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Comment from "../Comment";
 import PostFooter from "../UserPosts/PostFooter";
+import useUserProfileStore from "../../store/userProfileStore";
+import useAuthStore from "../../store/authStore";
 
-const ProfilePost = ({ img }) => {
+const ProfilePost = ({ post }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const userProfile = useUserProfileStore((state) => state.userProfile);
+  const authUser = useAuthStore((state) => state.user);
+  console.log(post);
   return (
     <>
       <GridItem
@@ -52,21 +58,21 @@ const ProfilePost = ({ img }) => {
             <Flex>
               <AiFillHeart size={20} />
               <Text fontWeight={"bold"} ml={2}>
-                108
+                {post.likes.length}
               </Text>
             </Flex>
             <Flex>
               <FaComment size={20} />
               <Text fontWeight={"bold"} ml={2}>
-                10
+                {post.comments.length}
               </Text>
             </Flex>
           </Flex>
         </Flex>
 
         <Image
-          src={img}
-          alt="profile"
+          src={post.imageURL}
+          alt="profile post"
           w={"100%"}
           h={"100%"}
           objectFit={"cover"}
@@ -87,16 +93,20 @@ const ProfilePost = ({ img }) => {
               gap={4}
               w={{ base: "90%", sm: "70%", md: "full" }}
               mx={"auto"}
+              maxH={"90vh"}
+              minH={"50vh"}
             >
-              <Box
+              <Flex
                 borderRadius={4}
                 overflow={"hidden"}
                 border={"1px solid"}
                 borderColor={"whiteAlpha.300"}
                 flex={1.5}
+                justifyContent={"center"}
+                alignContent={"center"}
               >
-                <Image src={img} alt="profilepost" />
-              </Box>
+                <Image src={post.imageURL} alt="profilepost" />
+              </Flex>
               <Flex
                 flex={1}
                 flexDir={"column"}
@@ -106,21 +116,25 @@ const ProfilePost = ({ img }) => {
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
                   <Flex alignItems={"center"} gap={4}>
                     <Avatar
-                      src="/public/161597844.jpg"
+                      src={userProfile.profilePicURL}
                       size={"sm"}
                       name="Ilgar Guliyev"
                     />
                     <Text fontWeight={"bold"} fontSize={12}>
-                      guliyevv_i
+                      {userProfile.username}
                     </Text>
                   </Flex>
-                  <Box
-                    _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
-                    borderRadius={4}
-                    p={1}
-                  >
-                    <MdDelete size={20} cursor={"pointer"} />
-                  </Box>
+                  {authUser?.uid === userProfile.uid && (
+                    <Button
+                      size={"sm"}
+                      bg={"transparent"}
+                      _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
+                      borderRadius={4}
+                      p={1}
+                    >
+                      <MdDelete size={20} cursor={"pointer"} />
+                    </Button>
+                  )}
                 </Flex>
                 <Divider my={4} bg={"gray.500"} />
                 <VStack

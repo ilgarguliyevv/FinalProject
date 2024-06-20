@@ -1,37 +1,81 @@
-import { Box, Grid, Skeleton, VStack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+// import { Box, Flex, Grid, Skeleton, Text, VStack } from "@chakra-ui/react";
+// import ProfilePost from "./ProfilePost";
+// import useGetUserPosts from "../../hooks/useGetUserPosts";
+
+// const ProfilePosts = () => {
+//   const { isLoading, posts } = useGetUserPosts();
+
+//   const noPostsFound = !isLoading && posts.length === 0;
+//   if (noPostsFound) return <NoPostsFound />;
+//   return (
+//     <Grid
+//       templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(3, 1fr)" }}
+//       gap={1}
+//       columnGap={1}
+//     >
+//       {isLoading &&
+//         [0, 1, 2].map((_, index) => (
+//           <VStack key={index} alignItems={"flex-start"} gap={4}>
+//             <Skeleton w={"full"}>
+//               <Box h={"300px"}>contents wrapped</Box>
+//             </Skeleton>
+//           </VStack>
+//         ))}
+
+//       {!isLoading && (
+//         <>
+//           {posts?.map((post) => {
+//             <ProfilePost post={post} key={post.id} />;
+//           })}
+//         </>
+//       )}
+//     </Grid>
+//   );
+// };
+
+// export default ProfilePosts;
+
+// const NoPostsFound = () => {
+//   return (
+//     <Flex flexDir={"column"} textAlign={"center"} mx={"auto"} mt={10}>
+//       <Text fontSize={"2xl"}>No Posts Found 🤔</Text>
+//     </Flex>
+//   );
+// };
+
+import { Box, Flex, Grid, Skeleton, Text, VStack } from "@chakra-ui/react";
 import ProfilePost from "./ProfilePost";
+import useGetUserPosts from "../../hooks/useGetUserPosts";
 
 const ProfilePosts = () => {
-  const [loading, setLoading] = useState(true);
+  const { isLoading, posts } = useGetUserPosts();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
+  const noPostsFound = !isLoading && posts.length === 0;
+  if (noPostsFound) return <NoPostsFound />;
+
   return (
     <Grid
-      templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(3, 1fr)" }}
+      templateColumns={{
+        sm: "repeat(1, 1fr)",
+        md: "repeat(3, 1fr)",
+      }}
       gap={1}
       columnGap={1}
     >
-      {loading &&
-        [0, 1, 2, 3, 4, 5].map((_, index) => (
-          <VStack key={index} alignItems={"flex-start"} gap={4}>
+      {isLoading &&
+        [0, 1, 2].map((_, idx) => (
+          <VStack key={idx} alignItems={"flex-start"} gap={4}>
             <Skeleton w={"full"}>
-              <Box h={"300px"}>contents wrapped</Box>
+              <Box h="300px">contents wrapped</Box>
             </Skeleton>
           </VStack>
         ))}
 
-      {!loading && (
+      {!isLoading && (
         <>
-          <ProfilePost img="/image-1.jpeg" />
-          <ProfilePost img="/image-2.jpg" />
-          <ProfilePost img="/image-3.jpg" />
-          <ProfilePost img="/image-4.jpg" />
-          <ProfilePost img="/image-5.jpg" />
+          {posts.map((post) => (
+            <ProfilePost post={post} key={post.id} />
+          ))}
         </>
       )}
     </Grid>
@@ -39,3 +83,11 @@ const ProfilePosts = () => {
 };
 
 export default ProfilePosts;
+
+const NoPostsFound = () => {
+  return (
+    <Flex flexDir="column" textAlign={"center"} mx={"auto"} mt={10}>
+      <Text fontSize={"2xl"}>No Posts Found🤔</Text>
+    </Flex>
+  );
+};
