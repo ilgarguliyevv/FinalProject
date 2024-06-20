@@ -69,6 +69,7 @@ const Sidebar = () => {
               display={{ base: "none", md: "block" }}
               variant={"ghost"}
               _hover={{ bg: "transparent" }}
+              cursor={"pointer"}
               isLoading={isLoggingOut}
             >
               LogOut
