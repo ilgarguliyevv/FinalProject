@@ -27,6 +27,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { firestore, storage } from "../../firebase/firebase";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import usePostStore from "../../store/postStore";
+import Caption from "../Comment/Caption";
 
 const ProfilePost = ({ post }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -182,86 +183,10 @@ const ProfilePost = ({ post }) => {
                   maxH={"350px"}
                   overflowY={"auto"}
                 >
-                  <Comment
-                    createdAt={"5h ago"}
-                    username={"yagubhajili"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161597487?v=4"
-                    }
-                    text={"Ilqaaar cay suz"}
-                  />
-                  <Comment
-                    createdAt={"1h ago"}
-                    username={"guri_style"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/98018715?v=4"
-                    }
-                    text={"Zalim"}
-                  />
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />{" "}
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />{" "}
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />{" "}
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />{" "}
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />
-                  <Comment
-                    createdAt={"3h ago"}
-                    username={"umudelizade"}
-                    profileImg={
-                      "https://avatars.githubusercontent.com/u/161642826?v=4"
-                    }
-                    text={"Pese gedek?"}
-                  />
+                  {post.caption && <Caption post={post} />}
+                  {post.comments.map((comment, index) => (
+                    <Comment key={index} comment={comment} />
+                  ))}
                 </VStack>
                 <Divider my={4} bg={"gray.8000"} />
 
