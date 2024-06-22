@@ -5,22 +5,17 @@ import {
   SkeletonCircle,
   Skeleton,
   Box,
+  Text,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
 import UserPost from "./UserPost";
+import useGetFeedPost from "../../hooks/useGetFeedPosts";
 
 const UserPosts = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
+  const { isLoading, posts } = useGetFeedPost();
   return (
     <Container maxW={"container.sm"} py={10} px={2}>
-      {loading &&
-        [0, 1, 2, 3].map((_, index) => (
+      {isLoading &&
+        [0, 1, 2].map((_, index) => (
           <VStack key={index} gap={4} alignItems={"flex-start"} mb={10}>
             <Flex gap={2}>
               <SkeletonCircle size="10" />
@@ -30,38 +25,20 @@ const UserPosts = () => {
               </VStack>
             </Flex>
             <Skeleton w={"full"}>
-              <Box h={"500"}>contents wrapped</Box>
+              <Box h={"400"}>contents wrapped</Box>
             </Skeleton>
           </VStack>
         ))}
 
-      {!loading && (
+      {!isLoading &&
+        posts.length > 0 &&
+        posts.map((post) => <UserPost key={post.id} post={post} />)}
+      {!isLoading && posts.length === 0 && (
         <>
-          <UserPost
-            img="/image-1.jpeg"
-            username="ardaguler"
-            avatar="/image-1.jpeg"
-          />
-          <UserPost
-            img="/image-2.jpg"
-            username="cristiano"
-            avatar="/image-2.jpg"
-          />
-          <UserPost
-            img={"/image-3.jpg"}
-            username={"yagubhajili"}
-            avatar={"/image-3.jpg"}
-          />
-          <UserPost
-            img={"/image-4.jpg"}
-            username={"mercedes"}
-            avatar={"/image-4.jpg"}
-          />
-          <UserPost
-            img={"/image-5.jpg"}
-            username={"cars"}
-            avatar={"/image-5.jpg"}
-          />
+          <Text fontSize={"md"} color={"red.400"}>
+            Dayuum. Looks like you don&apos;t have any friends.
+          </Text>
+          <Text color={"red.400"}>Stop coding and go make some!!</Text>
         </>
       )}
     </Container>

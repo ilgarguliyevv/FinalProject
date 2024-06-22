@@ -5,9 +5,9 @@ import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 
 const useLikePost = (post) => {
-  const { isUptading, setIsUptading } = useState(false);
+  const [isUptading, setIsUptading] = useState(false);
   const authUser = useAuthStore((state) => state.user);
-  const [likes, setLikes] = useState(post.likes.length);
+  const [likes, setLikes] = useState(post.likes?.length || 0);
   const [isLiked, setIsLiked] = useState(post.likes?.includes(authUser?.uid));
   const showToast = useShowToast();
 
