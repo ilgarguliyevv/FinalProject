@@ -14,7 +14,7 @@ import {
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { SearchLogo } from "../../assets/contants";
 import useSearchUser from "../../hooks/useSearchUser";
 import SuggestedUser from "../SuggestedUsers/SuggestedUser";
@@ -27,7 +27,17 @@ const Search = () => {
     e.preventDefault();
     getUserProfile(searchRef.current.value);
   };
+
+  // useEffect(() => {
+  //   if (user) {
+  //     onClose();
+  //   }
+  // }, [user, onClose]);
   // console.log(user);
+  const handleProfileClick = () => {
+    navigate(`/profile/${user.username}`);
+    closeModal();
+  };
   return (
     <>
       <Tooltip
@@ -76,7 +86,13 @@ const Search = () => {
                 </Button>
               </Flex>
             </form>
-            {user && <SuggestedUser user={user} setUser={setUser} />}
+            {user && (
+              <SuggestedUser
+                user={user}
+                setUser={setUser}
+                closeModal={onClose}
+              />
+            )}
           </ModalBody>
         </ModalContent>
       </Modal>

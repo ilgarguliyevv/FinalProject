@@ -1,10 +1,12 @@
 import { Avatar, Box, Button, Flex, VStack } from "@chakra-ui/react";
 import useFollowUser from "../../hooks/useFollowUser";
 import useAuthStore from "../../store/authStore";
+import { Link, useNavigate } from "react-router-dom";
 
-const SuggestedUser = ({ user, setUser }) => {
+const SuggestedUser = ({ user, setUser, closeModal }) => {
   const { isFollowing, isUptading, handleFollowUser } = useFollowUser(user.uid);
   const authUser = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
   const onFollowUser = async () => {
     await handleFollowUser();
     setUser({
@@ -14,16 +16,38 @@ const SuggestedUser = ({ user, setUser }) => {
         : [...user.followers, authUser],
     });
   };
+
+  const handleProfileClick = (e) => {
+    e.preventDefault();
+    navigate(`/${user.username}`);
+    closeModal();
+  };
   return (
     <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"}>
       <Flex alignItems={"center"} gap={2}>
-        <Avatar src={user.profilePicURL} size={"md"} />
+        {/* <Link to={`/${user.username}`}> */}
+        {/* <Avatar src={user.profilePicURL} size={"md"} /> */}
+        {/* </Link> */}
+        <Box as="a" href={`/${user.username}`} onClick={handleProfileClick}>
+          <Avatar src={user.profilePicURL} size={"md"} />
+        </Box>
         <VStack spacing={2} alignItems={"start"}>
-          <Box fontSize={12} fontWeight={"bold"}>
+          {/* <Link to={`/${user.username}`}>
+            <Box fontSize={12} fontWeight={"bold"}>
+              {user.fullName}
+            </Box>
+          </Link> */}
+          <Box
+            as="a"
+            href={`/${user.username}`}
+            onClick={handleProfileClick}
+            fontSize={12}
+            fontWeight={"bold"}
+          >
             {user.fullName}
           </Box>
           <Box fontSize={11} color={"gray.500"}>
-            {user.followers.length} followers
+            {user.followers?.length} followers
           </Box>
         </VStack>
       </Flex>
